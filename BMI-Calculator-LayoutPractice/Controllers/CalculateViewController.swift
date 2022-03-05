@@ -9,7 +9,7 @@ import UIKit
 
 class CalculateViewController: UIViewController {
 
-    var bmi:Float = 0.0
+    var calculator = CalculatorBrain()
    
     @IBOutlet weak var height: UILabel!
     @IBOutlet weak var weight: UILabel!
@@ -19,7 +19,7 @@ class CalculateViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        print("View Did Load()")
+//        print("View Did Load()")
     }
     
     @IBAction func heightSlider(_ sender: UISlider) {
@@ -37,8 +37,9 @@ class CalculateViewController: UIViewController {
     @IBAction func calculatePressed(_ sender: UIButton) {
         //print(heightS.value)
         //print(weightS.value)
-        print(weightS.value/(heightS.value*heightS.value))
-        let bmi = weightS.value/pow(heightS.value,2)
+        //print(weightS.value/(heightS.value*heightS.value))
+      calculator.calculateBMI(height:heightS.value, weight:weightS.value)
+    
         
 //        let secondVC = SecondViewController()
 //        secondVC.bmiValue = "\(String(format:"%.2f",bmi))"
@@ -47,16 +48,19 @@ class CalculateViewController: UIViewController {
 //          let resultview = ResultViewController()
 //          resultview.bmidata = "\(bmi)"
 //          print("Data \(bmi)")
-        self.bmi = bmi
+        //calculator.bmi = bmi
         self.performSegue(withIdentifier:"Helloseague", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination as? ResultViewController {
-            vc.bmidata = String(format:"%.2f",bmi)
+            vc.bmidata = calculator.getBMIValue()
+            vc.bmiadvice = calculator.getBMIadvice()
+            vc.bmicolor = calculator.getBMIcolor()
         }
     }
 }
+
 
 
 

@@ -10,6 +10,9 @@ import UIKit
 class ResultViewController: UIViewController {
 
     var bmidata : String?
+    var bmiadvice :String?
+    var bmicolor :UIColor?
+ 
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var advice: UILabel!
     /*
@@ -21,9 +24,10 @@ class ResultViewController: UIViewController {
     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        print("Result View did load()")
-        bmiLabel.text=bmidata
+        // Do any additional setup after loading the view
+        bmiLabel.text = bmidata
+        advice.text = bmiadvice
+        view.backgroundColor = bmicolor
     }
     @IBAction func recalculate(_ sender: UIButton) {
     self.dismiss(animated:false, completion: nil)
